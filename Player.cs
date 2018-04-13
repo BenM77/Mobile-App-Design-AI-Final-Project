@@ -7,8 +7,9 @@ public class Player : MonoBehaviour
     public float maxSpeed = 10f;
     bool facingRight = true;
 
-    public FloatingJoystick theJoystick;
-
+    //public FloatingJoystick theJoystick;
+    protected FloatingJoystick theJoystick;
+        
     Animator anim;
 
     bool grounded = false;
@@ -26,6 +27,7 @@ public class Player : MonoBehaviour
         //anim = GetComponent<Animator>();
         playerRB2D = GetComponent<Rigidbody2D>();
         playerRB2D.velocity = new Vector2(0, 0);
+        theJoystick = FindObjectOfType<FloatingJoystick>();
     }
 
     void FixedUpdate()
@@ -39,8 +41,8 @@ public class Player : MonoBehaviour
 
         //anim.SetFloat("vSpeed", playerRB2D.velocity.y);
 
-        //float move = Input.GetAxis("Horizontal");
-        float move = theJoystick.getDirection();
+        float move = theJoystick.Horizontal;
+        //float move = theJoystick.getDirection();
 
         //anim.SetFloat("Speed", Mathf.Abs(move));
 
