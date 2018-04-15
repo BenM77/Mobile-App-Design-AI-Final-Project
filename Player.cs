@@ -74,16 +74,20 @@ public class Player : MonoBehaviour
         {
             //anim.SetBool("Grounded", false);
             playerRB2D.AddForce(new Vector2(0, jumpForce));
-            grounded = false;//my changes
 
             if (!doubleJump && !grounded)
                 doubleJump = true;
+
+            grounded = false;
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)//my changes
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "Ground")//reset the jump counts
+        {
             grounded = true;
+            doubleJump = false;
+        }
     }
 }
