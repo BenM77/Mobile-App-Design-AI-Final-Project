@@ -7,22 +7,21 @@ public class Player : MonoBehaviour
     public float maxSpeed = 10f;
     bool facingRight = true;
 
-    //public FloatingJoystick theJoystick;
-    protected FloatingJoystick theJoystick;
-        
+    FloatingJoystick theJoystick;
+
     Animator anim;
 
     bool grounded = false;
-    public Transform groundCheck;
-    float groundRadius = .2f;
-    public LayerMask whatIsGround;
+    //public Transform groundCheck;
+    //float groundRadius = .2f;
+    //public LayerMask whatIsGround;
     public float jumpForce = 700f;
 
     Rigidbody2D playerRB2D;
 
     bool doubleJump = false;
 
-    void start()
+    void Start()
     {
         //anim = GetComponent<Animator>();
         playerRB2D = GetComponent<Rigidbody2D>();
@@ -32,7 +31,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
+        //grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
         //anim.SetBool("Ground", grounded);
 
         if (grounded)
@@ -41,8 +40,9 @@ public class Player : MonoBehaviour
 
         //anim.SetFloat("vSpeed", playerRB2D.velocity.y);
 
-        float move = theJoystick.Horizontal;
+        //float move = Input.GetAxis("Horizontal");
         //float move = theJoystick.getDirection();
+        float move = theJoystick.Horizontal;
 
         //anim.SetFloat("Speed", Mathf.Abs(move));
 
@@ -74,9 +74,16 @@ public class Player : MonoBehaviour
         {
             //anim.SetBool("Grounded", false);
             playerRB2D.AddForce(new Vector2(0, jumpForce));
+            grounded = false;//my changes
 
             if (!doubleJump && !grounded)
                 doubleJump = true;
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)//my changes
+    {
+        if (collision.gameObject.tag == "Ground")
+            grounded = true;
     }
 }
