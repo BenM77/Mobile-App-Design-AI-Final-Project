@@ -1,10 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
     public float maxSpeed = 10f;
+    public int health;
+
+    Animator playerAnimator;
+
+    public GameManager theGameManager;
+
+    public Text healthText; 
+
     bool facingRight = true;
 
     FloatingJoystick theJoystick;
@@ -27,6 +37,7 @@ public class Player : MonoBehaviour
         playerRB2D = GetComponent<Rigidbody2D>();
         playerRB2D.velocity = new Vector2(0, 0);
         theJoystick = FindObjectOfType<FloatingJoystick>();
+        playerAnimator = GetComponent<Animator>();
     }
 
     void FixedUpdate()
@@ -53,6 +64,10 @@ public class Player : MonoBehaviour
         else if (move < 0 && facingRight)
             Flip();
 
+        if (move != 0)
+            playerAnimator.SetBool("Running", true);
+        else
+            playerAnimator.SetBool("Running", false);
     }
 
     void Update()
@@ -88,6 +103,22 @@ public class Player : MonoBehaviour
         {
             grounded = true;
             doubleJump = false;
+        }
+        else if (collision.gameObject.tag == "Enemy")
+            doubleJump = false;
+    }
+
+    public void takeDamage(int dmgToTake)
+    {
+        if (dmgToTake >= health)
+        {
+            theGameManager.GameOver(this.gameObject);
+            this.enabled = false;
+        }
+        else
+        {
+            health = health - dmgToTake;
+            healthText.text = "Player Health:\n" + health;
         }
     }
 }
