@@ -6,12 +6,12 @@ public class WeaponPickup : MonoBehaviour
 {
     public GameObject maceSprite;
     public GameObject grenadeSprite;
-    GameObject activeSprite;
+
+    [HideInInspector] public GameObject activeSprite;
 
     private void Start()
     {
         activeSprite = maceSprite;
-        activeSprite.SetActive(true);
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {

@@ -6,9 +6,30 @@ public class Mace : Weapon
 {
     public int maceDamage;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    bool swinging;
+
+    public Animator maceAnimator;
+
+    void Start()
     {
-        Damage(collision.gameObject, maceDamage);
+        maceAnimator = GetComponent<Animator>();
+    }
+
+    void OnTriggerStay2D(Collider2D collision)
+    {
+        if(swinging)
+            Damage(collision.gameObject, maceDamage);
+    }
+
+    public void Swing() //also plays the animation
+    {
+        swinging = true;
+        maceAnimator.SetTrigger("Swinging");
+    }
+
+    private void Update()
+    {
+        //swinging = false;
     }
 
 }
