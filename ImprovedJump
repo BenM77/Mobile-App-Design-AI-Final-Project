@@ -1,0 +1,26 @@
+using UnityEngine;
+using System.Collections;
+
+//Built with help from a video tutorial by Board To Bits Games
+
+public class ImprovedJump: MonoBehaviour {
+
+    public float FallMultiplier = 2.5f;
+    public LowJumpMultiplier = 2f;
+    
+    Rigidbody2D PlayerRB2D;
+
+    void Awake() {
+      PlayerRB2D = GetComponent<RigidBody 2D> (); 
+    }
+    
+    void Update() {
+      if (PlayerRB2D.velocity.y < 0) {
+        PlayerRB2D.velocity += Vector2.up * Physics2D.gravity.y * (FallMultiplier - 1) * Time.deltaTime;
+      }
+      else if (PlayerRB2D.velocity.y > 0 && !Input.GetButton("Jump")) {
+        PlayerRB2D.velocity += Vector2.up * Physics2D.gravity.y * (LowJumpMultiplier - 1) * Time.deltaTime;
+      }
+    
+    }
+}
