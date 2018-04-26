@@ -7,7 +7,10 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     public float maxSpeed = 10f;
-    public int health;
+    public int maxHealth;
+    int health;
+
+    public Image healthBar;
 
     Animator playerAnimator;
 
@@ -15,21 +18,22 @@ public class Player : MonoBehaviour
 
     public Text healthText; 
 
-    bool facingRight = true;
+    [HideInInspector] public bool facingRight = true;
 
     FloatingJoystick theJoystick;
 
     Animator anim;
 
     bool grounded = false;
-    //public Transform groundCheck;
-    //float groundRadius = .2f;
-    //public LayerMask whatIsGround;
-    public float jumpForce = 700f;
+
+    public float jumpForce = 1500f;
 
     Rigidbody2D playerRB2D;
 
     bool doubleJump = false;
+
+    public float fallMultiplier = 2.5f;
+    public float riseMultiplier = .5f;
 
     void Start()
     {
@@ -38,6 +42,7 @@ public class Player : MonoBehaviour
         playerRB2D.velocity = new Vector2(0, 0);
         theJoystick = FindObjectOfType<FloatingJoystick>();
         playerAnimator = GetComponent<Animator>();
+        health = maxHealth;
     }
 
     void FixedUpdate()
@@ -72,6 +77,17 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        healthBar.fillAmount = (float)health / maxHealth;
+
+        //jump
+        if (playerRB2D.velocity.y < 0)
+        {
+            playerRB2D.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        }
+        else if (playerRB2D.velocity.y > 0)// && !Input.GetButton("Jump Button"))
+        {
+            playerRB2D.velocity += Vector2.up * Physics2D.gravity.y * (riseMultiplier - 1) * Time.deltaTime;
+        }
     }
 
     void Flip()
@@ -112,8 +128,10 @@ public class Player : MonoBehaviour
     {
         if (dmgToTake >= health)
         {
+            health = 0;
+            healthText.text = "Player Health:\n" + health;
             theGameManager.GameOver(this.gameObject);
-            this.enabled = false;
+            //this.enabled = false;
         }
         else
         {
