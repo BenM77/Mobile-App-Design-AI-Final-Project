@@ -17,19 +17,13 @@ public class Mace : Weapon
 
     void OnTriggerStay2D(Collider2D collision)
     {
-        if(swinging)
+        if(maceAnimator.GetCurrentAnimatorStateInfo(0).IsName("Mace Swing"))
             Damage(collision.gameObject, maceDamage);
     }
 
-    public void Swing() //also plays the animation
+    public void Swing()
     {
-        swinging = true;
         maceAnimator.SetTrigger("Swinging");
-    }
-
-    private void Update()
-    {
-        //swinging = false;
     }
 
 }

@@ -5,7 +5,8 @@ using UnityEngine;
 public class AttackButtons : MonoBehaviour
 {
     public Mace mace;
-    public Grenade grenade;
+    public GrenadeSprite grenade;
+    public Player player;
 
     public void AttackOne()
     {
@@ -17,6 +18,10 @@ public class AttackButtons : MonoBehaviour
         if (mace.gameObject.activeInHierarchy)
         {
             mace.Swing();
+        }
+        else if (grenade.gameObject.activeInHierarchy)
+        {
+            grenade.Throw(player);
         }
     }
 
