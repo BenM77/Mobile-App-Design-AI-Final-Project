@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AttackButtons : MonoBehaviour
 {
+    public Spear spear;
     public Mace mace;
     public GrenadeSprite grenade;
     public BowSprite bow;
@@ -13,7 +14,7 @@ public class AttackButtons : MonoBehaviour
 
     public void AttackOne()
     {
-        //default attack
+        spear.Attack();
     }
 
     public void AttackTwo()
