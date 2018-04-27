@@ -9,12 +9,12 @@ public class Arrow : Weapon
     void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject newHitObject = collision.gameObject;
-        if (newHitObject.tag == "Enemy")
+        if (newHitObject.tag == "Player" || newHitObject.tag == "Enemy")
 		{
 			newHitObject.SendMessage("takeDamage", arrowDamage);
 		}
 		
-		this.gameObject.SetActive(false);
+	this.gameObject.SetActive(false);
     }
 
 }
