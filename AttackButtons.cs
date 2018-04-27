@@ -6,6 +6,9 @@ public class AttackButtons : MonoBehaviour
 {
     public Mace mace;
     public GrenadeSprite grenade;
+    public BowSprite bow;
+    public BoomerangSprite boomerang;
+    
     public Player player;
 
     public void AttackOne()
@@ -22,6 +25,14 @@ public class AttackButtons : MonoBehaviour
         else if (grenade.gameObject.activeInHierarchy)
         {
             grenade.Throw(player);
+        }
+        else if (bow.gameObject.activeInHierarchy)
+        {
+            bow.Shoot(player);
+        }
+        else if (boomerang.gameObject.activeInHierarchy)
+        {
+            boomerang.Throw(player);
         }
     }
 
