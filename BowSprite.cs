@@ -37,9 +37,9 @@ public class BowSprite : MonoBehaviour
         //newArrow1.GetComponent<Animator>().SetTrigger("Thrown");
         
 		//Disable gravity for all arrows
-		newArrow1.GetComponent<Rigidbody2D>.gravityScale = 0f;
-		newArrow2.GetComponent<Rigidbody2D>.gravityScale = 0f;
-		newArrow3.GetComponent<Rigidbody2D>.gravityScale = 0f;
+		//newArrow1.GetComponent<Rigidbody2D>.gravityScale = 0f;
+		//newArrow2.GetComponent<Rigidbody2D>.gravityScale = 0f;
+		//newArrow3.GetComponent<Rigidbody2D>.gravityScale = 0f;
 
 		//To shoot arrows at a 45 degree angle, y force must be the same as x force
 		newArrow1.GetComponent<Rigidbody2D>().AddForce(new Vector2(throwForceX * throwRight, throwForceX));

@@ -6,6 +6,8 @@ public class WeaponPickup : MonoBehaviour
 {
     public GameObject maceSprite;
     public GameObject grenadeSprite;
+    public GameObject boomerangSprite;
+    public GameObject bowSprite;
 
     [HideInInspector] public GameObject activeSprite;
 
@@ -27,8 +29,19 @@ public class WeaponPickup : MonoBehaviour
             activeSprite = grenadeSprite;
             SwitchWeapons(collision.gameObject);
         }
+        else if(collision.gameObject.tag == "Boomerang")
+        {
+            activeSprite.SetActive(false);
+            activeSprite = boomerangSprite;
+            SwitchWeapons(collision.gameObject);
 
-
+        }
+        else if (collision.gameObject.tag == "Bow")
+        {
+            activeSprite.SetActive(false);
+            activeSprite = bowSprite;
+            SwitchWeapons(collision.gameObject);
+        }
     }
 
     void SwitchWeapons(GameObject toDestroy)

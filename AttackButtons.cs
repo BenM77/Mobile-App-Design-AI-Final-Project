@@ -6,17 +6,17 @@ public class AttackButtons : MonoBehaviour
 {
     public Mace mace;
     public GrenadeSprite grenade;
-    public BowSprite bow;
+    //public BowSprite bow;
     public BoomerangSprite boomerang;
     
-    public Player player;
+    //public Character thrower;
 
     public void AttackOne()
     {
         //default attack
     }
 
-    public void AttackTwo()
+    public void AttackTwo(Character thrower)
     {
         if (mace.gameObject.activeInHierarchy)
         {
@@ -24,15 +24,15 @@ public class AttackButtons : MonoBehaviour
         }
         else if (grenade.gameObject.activeInHierarchy)
         {
-            grenade.Throw(player);
+            grenade.Throw(thrower);
         }
-        else if (bow.gameObject.activeInHierarchy)
-        {
-            bow.Shoot(player);
-        }
+        //else if (bow.gameObject.activeInHierarchy)
+        //{
+        //    bow.Shoot(player);
+        //}
         else if (boomerang.gameObject.activeInHierarchy)
         {
-            boomerang.Throw(player);
+            boomerang.Throw(thrower);
         }
     }
 

@@ -17,15 +17,20 @@ public class GrenadeSprite : MonoBehaviour
         grenadeCount.text = "Grenades:\n" + uses;
     }
 
-    public void Throw(Player player)
+    public void OnDisable()
+    {
+        grenadeCount.text = "";
+    }
+
+    public void Throw(Character thrower)
     {
         uses--;
         grenadeCount.text = "Grenades:\n" + uses;
         int throwRight = 1;
-        if (!player.facingRight)
+        if (!thrower.facingRight)
             throwRight = -1;
 
-        GameObject newGrenade = Instantiate(grenade, player.transform.position + new Vector3((float)1 * throwRight, (float).5), Quaternion.identity);
+        GameObject newGrenade = Instantiate(grenade, thrower.transform.position + new Vector3((float)1 * throwRight, (float).5), Quaternion.identity);
         newGrenade.tag = "ThrownWeapon";
         newGrenade.GetComponent<Animator>().SetTrigger("Thrown");
         newGrenade.GetComponent<Rigidbody2D>().AddForce(new Vector2(throwForceX * throwRight, throwForceY));
