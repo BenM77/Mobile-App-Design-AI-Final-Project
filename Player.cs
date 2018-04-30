@@ -4,25 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class Player : MonoBehaviour
+public class Player : Character
 {
-    public float maxSpeed = 10f;
-    public int maxHealth;
-    int health;
-
-    public Image healthBar;
-
     Animator playerAnimator;
 
     public GameManager theGameManager;
 
-    public Text healthText; 
-
-    [HideInInspector] public bool facingRight = true;
-
     FloatingJoystick theJoystick;
-
-    Animator anim;
 
     bool grounded = false;
 
@@ -47,18 +35,15 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        //grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
-        //anim.SetBool("Ground", grounded);
-
         if (grounded)
             doubleJump = false;
 
-
-        //anim.SetFloat("vSpeed", playerRB2D.velocity.y);
-
-        //float move = Input.GetAxis("Horizontal");
-        //float move = theJoystick.getDirection();
-        float move = theJoystick.Horizontal;
+        int move = 0;
+        if (theJoystick.Horizontal < 0)
+            move = -1;
+        else if (theJoystick.Horizontal > 0)
+            move = 1;
+            
 
         //anim.SetFloat("Speed", Mathf.Abs(move));
 
@@ -120,7 +105,7 @@ public class Player : MonoBehaviour
             grounded = true;
             doubleJump = false;
         }
-        else if (collision.gameObject.tag == "Enemy")
+        else if (collision.gameObject.tag == "Enemy") // the player can jump once off of the enemy
             doubleJump = false;
     }
 
