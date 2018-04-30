@@ -3,16 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Character
 {
-    public int maxHealth;
-    int health;
-
-    public Text healthText;
-    public Image healthBar;
-
-    [HideInInspector] public bool facingRight = true;
-
     public GameManager theGameManager;
 
 
