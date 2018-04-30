@@ -19,7 +19,12 @@ public class BowSprite : MonoBehaviour
         uses = maxUses;
         arrowCount.text = "Arrows:\n" + uses;
     }
-
+    
+    public void OnDisable()
+    {
+    	arrowCount.text = "";
+    }
+    
     public void Shoot(Player player)
     {
         uses--;
@@ -30,7 +35,7 @@ public class BowSprite : MonoBehaviour
 			
 		//This shoots 3 arrows with the same horizontal speed and different vertical speeds
         GameObject newArrow1 = Instantiate(upArrow, player.transform.position + new Vector3((float)1 * throwRight, (float).5), Quaternion.identity);
-		GameObject newArrow2 = Instantiate(straightArrow, player.transform.position + new Vector3((float)1 * throwRight, (float).5), Quaternion.identity);
+	GameObject newArrow2 = Instantiate(straightArrow, player.transform.position + new Vector3((float)1 * throwRight, (float).5), Quaternion.identity);
         GameObject newArrow3 = Instantiate(downArrow, player.transform.position + new Vector3((float)1 * throwRight, (float).5), Quaternion.identity);
 
         //newArrow1.tag = "ThrownWeapon";        
@@ -43,15 +48,15 @@ public class BowSprite : MonoBehaviour
 
 		//To shoot arrows at a 45 degree angle, y force must be the same as x force
 		newArrow1.GetComponent<Rigidbody2D>().AddForce(new Vector2(throwForceX * throwRight, throwForceX));
-		newArrow2.GetComponent<Rigidbody2D>().AddForce(new Vector2(throwForceX * throwRight, 0));
+		newArrow2.GetComponent<Rigidbody2D>().AddForce(new Vector2(throwForceX * sqrt(2) * throwRight, 0));
 		//To make same velocity vectors, multiply newArrow2 by sqrt(2) 
 		newArrow3.GetComponent<Rigidbody2D>().AddForce(new Vector2(throwForceX * throwRight, -throwForceX));
 
         
-		if (uses == 0)
+	if (uses == 0)
         {
             this.gameObject.SetActive(false);
-            arrowCount.text = "";
+            //arrowCount.text = "";
         }
     }
 }
