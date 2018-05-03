@@ -17,6 +17,7 @@ public class SpearSprite : MonoBehaviour
         GameObject newSpear = Instantiate(spear, thrower.transform.position + new Vector3((float)1 * throwRight, (float)1), Quaternion.identity);
         newSpear.tag = "ThrownWeapon";
         //newSpear.GetComponent<Animator>().SetTrigger("Thrown");
+        newSpear.GetComponent<Rigidbody2D>.gravityScale = 0f;
         newSpear.GetComponent<Rigidbody2D>().AddForce(new Vector2(throwForceX * throwRight, 0));
     }
 }
