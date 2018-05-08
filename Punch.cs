@@ -7,6 +7,8 @@ public class Punch : Weapon
     public int punchDamage;
 
     bool punching;
+    
+    public Character target;
 
     public Animator punchAnimator;
 
@@ -14,11 +16,23 @@ public class Punch : Weapon
     {
         punchAnimator = GetComponent<Animator>();
     }
+    
+    void OnEnable() 
+    {
+    //target.weapon.SetActive(false);
+    }
+    
+    void OnDisable()
+    {
+    //target.weapon.SetActive(true);
+    }
 
-    void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if(punchAnimator.GetCurrentAnimatorStateInfo(0).IsName("Throw Punch"))
             Damage(collision.gameObject, punchDamage);
+            
+        this.gameObject.SetActive(false);    
     }
 
     public void Punch()
