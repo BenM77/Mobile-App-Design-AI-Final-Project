@@ -6,7 +6,7 @@ public class Punch : Weapon
 {
     public int punchDamage;
 
-    bool punching;
+    //bool punching;
     
     public Character target;
 
@@ -35,9 +35,12 @@ public class Punch : Weapon
         this.gameObject.SetActive(false);    
     }
 
-    public void Punch()
+    public void ThrowPunch()
     {
         punchAnimator.SetTrigger("Punching");
     }
+
+    //In attackbutton, attack 1
+    //Punch.ThrowPunch();
 
 }
